@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="country-states.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <title>FilipinoCupid Sample Form</title>
+    <body>
+      <div class="container">
+
+        <form action="#">
+          <div class="form-first">
+          <div class="details personal">
+            <span class="title"></span>
+  
+       <div class="fields">
+       <div class="input-field">
+       <label>I'm a</label>
+       <select name="gender" id="gender" required>
+         <option value="">-Select Gender-</option>
+         <option value="Male">Male</option>
+         <option value="Female">Female</option>
+         <option value="Other">Other</option>
+           </select>
+           </div>
+           
+       <div class="input-field">
+       <label>I'm looking for</label>
+       <select name="gender" id="gender" required>
+         <option value="">-Select Gender-</option>
+         <option value="Male">Male</option>
+         <option value="Female">Female</option>
+         <option value="Other">Other</option>
+           </select>
+           </div>
+           
+          <div class="input-field">
+              <label>What's your first name?</label>
+              <input type="text" placeholder="First name" required>
+           </div>
+           
+          <div class="input-field">
+              <label>How old are you?</label>
+          <input type="number" name="age" min="18" max="65" placeholder="Enter your age" required>
+              </div>
+            
+            <div class="input-field">
+            <label for="country" class="form-label">Where do you live?</label>
+            <select id="country" class="form-select" placeholder="select country" required>
+             </select>
+             </div>
+            
+          <div class="input-field">
+            <label for="state" class="form-label">State/Province</label>
+            <select id="state" class="form-select" placeholder="select state" required>
+             </select>
+             </div>
+             
+           <div class="input-field">
+              <label>What's your email address?</label>
+              <input type="email" id="email" placeholder="email@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+            </div>
+           
+         <label>What password do you want to use?
+         <div class="password-field">
+         <input type="password" id="password" placeholder="Your FilipinoCupid password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required />
+         <span><i id="toggler"class="far fa-eye"></i></span>
+          </div>
+          </label>
+            
+            <label class="container">
+            <input class="myCheck" type="checkbox" id="myCheck" onmouseover="myFunction()" required>Yes, I confirm that I am over 18 and agree to the Terms of Use and Privacy Statement.
+            </label>
+ 
+          <button ondblclick="myalert()" class="submitBtn">
+            <span class="BtnSubmit" type="submit">VIEW SINGLES NOW</span>
+            <i class="uil uil-navigator"></i>
+          </button>
+          </div>
+          </div>
+          </div>
+          </div>
+        </form>
+        
+    <script>
+    
+   
+var user_country_code = "IN";
+
+(() => {
+
+    const country_array = country_and_states.country;
+    const states_array = country_and_states.states;
+
+    const id_state_option = document.getElementById("state");
+    const id_country_option = document.getElementById("country");
+
+    const createCountryNamesDropdown = () => {
+        let option =  '';
+        option += '<option value="">select country</option>';
+
+        for(let country_code in country_array){
+
+        let selected = (country_code == user_country_code) ? ' selected' : '';
+            option += '<option value="'+country_code+'"'+selected+'>'+country_array[country_code]+'</option>';
+        }
+        id_country_option.innerHTML = option;
+    };
+
+    const createStatesNamesDropdown = () => {
+        let selected_country_code = id_country_option.value;
+        let state_names = states_array[selected_country_code];
+        
+        if(!state_names){
+            id_state_option.innerHTML = '<option>select state</option>';
+            return;
+        }
+        let option = '';
+        option += '<select id="state">';
+        option += '<option>select state</option>';
+        for (let i = 0; i < state_names.length; i++) {
+            option += '<option value="'+state_names[i].code+'">'+state_names[i].name+'</option>';
+        }
+        option += '</select>';
+        id_state_option.innerHTML = option;
+    };
+
+    id_country_option.addEventListener('change', createStatesNamesDropdown);
+
+    createCountryNamesDropdown();
+    createStatesNamesDropdown();
+})();
+
+var password = document.getElementById('password');
+var toggler = document.getElementById('toggler');
+showHidePassword = () => {
+if (password.type == 'password') {
+password.setAttribute('type', 'text');
+toggler.classList.add('fa-eye-slash');
+} else {
+toggler.classList.remove('fa-eye-slash');
+password.setAttribute('type', 'password');
+}
+};
+toggler.addEventListener('click', showHidePassword);
+
+</script>
+    </body>
+  </head>
+</html>
